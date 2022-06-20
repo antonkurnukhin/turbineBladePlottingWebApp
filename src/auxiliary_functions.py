@@ -1,6 +1,7 @@
 import numpy as np
 from numba import njit
 from scipy.special import comb
+from scipy.integrate import quad
 
 
 @njit
@@ -63,3 +64,38 @@ def calculalate_bezier_curve_coordinates(
     bezier_y_coordinates = np.dot(y_coordinates, polynomial_array)
 
     return (bezier_x_coordinates, bezier_y_coordinates)
+
+
+def rotate_coordinates(data: dict):
+    theta = -data['input_data']['beta_y']
+    rotated_coordinates = (
+        data['x_array'] * np.cos(theta) + data['y_array'] * -np.sin(theta),
+        data['x_array'] * np.sin(theta) + data['y_array'] * np.cos(theta)
+    )
+
+    return rotated_coordinates
+
+
+def calculate_blade_area(blade: dict):
+    rotated_x, rotated_y = rotate_coordinates(blade_data=blade)
+
+    x_max = np.argmax(rotated_x)
+    x_min = np.argmin(rotated_x)
+
+    front_x = rotated_x[x_max:x_min+1]
+    front_y = rotated_y[x_max:x_min+1]
+    back_x = np.delete(rotated_x, slice(x_max+1, x_min))
+    back_y = np.delete(rotated_y, slice(x_max+1, x_min))
+
+    sorted_back = sorted(zip(back_x, back_y), key=lambda x: x[0])
+
+    back_x = [c[0] for c in sorted_back]
+    back_y = [c[1] for c in sorted_back]
+
+    area = quad(
+        lambda x: abs(np.interp(x, back_x, back_y) - np.interp(x, front_x, front_y)),
+        rotated_x[x_min],
+        rotated_x[x_max]
+    )[0]
+    return area
+    
