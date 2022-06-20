@@ -1,4 +1,6 @@
+import numpy as np
 from numba import njit
+from scipy.special import comb
 
 
 @njit
@@ -28,4 +30,36 @@ def find_2d_intersection_point(
         x_coordinate_of_interserction_point, 
         y_coordinate_of_interserction_point)
 
-    
+
+def calculate_bernstein_polynomial(i, n, t):
+    """https://en.wikipedia.org/wiki/Bernstein_polynomial"""
+    s = comb(n, i) * (t ** (n - i)) * (1 - t) ** i
+    return s
+
+
+def calculalate_bezier_curve_coordinates(
+    base_points: tuple, 
+    number_of_dots: int=200):
+
+    number_of_dots = number_of_dots if \
+        isinstance(number_of_dots, int) else \
+        int(number_of_dots)
+
+    number_of_points = len(base_points)
+    x_coordinates = [p[0] for p in base_points]
+    y_coordinates = [p[1] for p in base_points]
+
+    t = np.linspace(0.0, 1.0, number_of_dots)
+
+    polynomial_array = [
+        calculate_bernstein_polynomial(i=i, n=number_of_points-1, t=t) for i in \
+            range(0, number_of_points)]
+
+    x_coordinates = np.array(x_coordinates)
+    y_coordinates = np.array(y_coordinates)
+    polynomial_array = np.array(polynomial_array)
+
+    bezier_x_coordinates = np.dot(x_coordinates, polynomial_array)
+    bezier_y_coordinates = np.dot(y_coordinates, polynomial_array)
+
+    return (bezier_x_coordinates, bezier_y_coordinates)
