@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="container-fluid flex-column h-100">
+    {% include 'header.html' %}
+    <div class="row r3">
+        <div class="col-md-3">
+            <form class="form-contact">
+
+                {% for key, value in fields.items() %}
+                    <div class="form-group my-0">
+                        <label for="{{ key }}">{{ value['description'] }}</label>
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            id="{{ key }}" 
+                            name="{{ key }}" 
+                            step=".01" 
+                            value="{{value['default']}}">
+                    </div>
+                {% endfor %}
+
+                <hr width="300px">
+                <button type="submit" onclick="fetchDataFromApi(this.form); return false" class="btn btn-outline-dark btn-lg btn-block">
+                    Построить
+                </button>
+            </form>
+        </div>
+        <div class="col-md-9">
+            <div id="chart_area" class="mr-5 w-100 h-100"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
