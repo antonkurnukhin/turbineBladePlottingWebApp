@@ -1,6 +1,6 @@
 from pprint import pprint
 import numpy as np
-from auxiliary_functions import calculalate_bezier_curve_coordinates, \
+from .auxiliary_functions import calculalate_bezier_curve_coordinates, \
     find_2d_intersection_point
 
 PI_2 = np.pi / 2.
@@ -15,14 +15,21 @@ def create_blade_section(
         blade_outlet_opening_angle: float,
         leading_edge_radius: float,
         trailing_edge_radius: float,
-        inlet_flow_speed: float,
-        outlet_flow_speed: float,
+        inlet_flow_speed: float=100.,
+        outlet_flow_speed: float=100.,
         number_of_dots_for_bezier_curve: int=200):
 
     number_of_dots_for_bezier_curve = number_of_dots_for_bezier_curve if \
         isinstance(number_of_dots_for_bezier_curve, int) else \
         int(number_of_dots_for_bezier_curve)
     number_of_dots_for_edge_arc_bezier_curve = int(number_of_dots_for_bezier_curve/5)
+    # radians
+    blade_inlet_angle = np.radians(blade_inlet_angle)
+    blade_outlet_angle = np.pi-np.radians(blade_outlet_angle)
+    blade_installation_angle = np.radians(blade_installation_angle)
+    blade_inlet_opening_angle = np.radians(blade_inlet_opening_angle)
+    blade_outlet_opening_angle = np.radians(blade_outlet_opening_angle)
+    
     # precalculation
     inlet_opening_angle_minus_2 = blade_inlet_angle - blade_inlet_opening_angle / 2.
     inlet_opening_angle_plus_2 = blade_inlet_angle + blade_inlet_opening_angle / 2.
