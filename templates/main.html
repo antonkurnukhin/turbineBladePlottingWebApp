@@ -6,20 +6,42 @@
     <div class="row r3">
         <div class="col-md-3">
             <form class="form-contact">
-
                 {% for key, value in fields.items() %}
-                    <div class="form-group my-0">
-                        <label for="{{ key }}">{{ value['description'] }}</label>
-                        <input 
-                            type="number" 
-                            class="form-control" 
-                            id="{{ key }}" 
-                            name="{{ key }}" 
-                            step=".01" 
-                            value="{{value['default']}}">
+                    <h5 class="my-1">
+                        {% if key=='stator_blade' %}
+                            Лопатка статора
+                        {% elif key=='rotor_blade'  %}
+                            Лопатка ротора
+                        {% else %}
+                            Параметры потока
+                        {% endif %}
+                    </h5>
+                    <div class="row g-3">
+                        {% for k, v in value.items() %}
+                            <!-- TODO fix this statement -->
+                            {% if 'beta_' in v['mathform'] or 
+                                'alpha_' in v['mathform']  or 
+                                'gamma_' in v['mathform'] or 
+                                'r_' in v['mathform']  or 
+                                'c_' in v['mathform']  or 
+                                'w_' in v['mathform'] %}
+                                <div class="col-6 px-1">
+                                    <div class="input-group form-group my-1" data-bs-toggle="tooltip" data-bs-placement="top" title="{{v['description']}}">
+                                        <span class="input-group-text">{{ v['mathform'] }}</span>
+                                        <input type="number" class="form-control" id="{{ k }}" name="{{ k }}" step=".01" value="{{v['default']}}">
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="col-12 px-1">
+                                    <div class="input-group form-group my-1" data-bs-toggle="tooltip" data-bs-placement="top" title="{{v['description']}}">
+                                        <span class="input-group-text">{{ v['mathform'] }}</span>
+                                        <input type="number" class="form-control" id="{{ k }}" name="{{ k }}" step=".01" value="{{v['default']}}">
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 {% endfor %}
-
                 <hr width="300px">
                 <button type="submit" onclick="fetchDataFromApi(this.form); return false" class="btn btn-outline-dark btn-lg btn-block">
                     Построить
