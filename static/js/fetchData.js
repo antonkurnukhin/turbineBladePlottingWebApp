@@ -1,9 +1,19 @@
+function preLoad() {
+  // TODO
+  projectName = window.localStorage.getItem('projectName')
+
+  if (projectName == null) {
+    fetchDataFromApi()
+  } else {
+    window.localStorage.getItem('projectData')
+  }
+}
+
 function fetchDataFromApi() {
   var formData = new FormData(document.querySelector('form'));
-  
   var payload = {};
+
   formData.forEach( (value, key) => payload[key] = value );
-  console.log(payload);
 
   axios({
     method: 'POST',
@@ -12,7 +22,7 @@ function fetchDataFromApi() {
     data: payload,
   })
   .then((response) => {
-    draw_chart(response.data)
+    draw_all_data(response.data)
   }, (error) => {
     console.log(error);
   });
