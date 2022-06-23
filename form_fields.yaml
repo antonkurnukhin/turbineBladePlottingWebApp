@@ -1,0 +1,87 @@
+stator_blade:
+  stator_blade_chord:
+    description: Хорда лопатки, [мм]
+    mathform: \(B_1\)
+    default: 28.3
+  stator_blade_inlet_angle:
+    description: Угол входа потока, [град.]
+    mathform: \(\alpha_0\)
+    default: 90.0
+  stator_blade_outlet_angle:
+    description: Угол выхода потока, [град.]
+    mathform: \(\alpha_1\)
+    default: 10.0
+  stator_blade_inlet_opening_angle:
+    description: Угол раскрытия передней кромки, [град.]
+    mathform: \(\gamma_1\)
+    default: 10.0
+  stator_blade_outlet_opening_angle:
+    description: Угол раскрытия задней кромки, [град.]
+    mathform: \(\gamma_2\)
+    default: 8.0
+  stator_leading_edge_radius:
+    description: Радиус передней кромки, [мм]
+    mathform: \(r_1\)
+    default: 2.708
+  stator_trailing_edge_radius:
+    description: Радиус задней кромки, [мм]
+    mathform: \(r_2\)
+    default: 0.283
+  stator_relative_step:
+    description: Относительный шаг турбинной решетки
+    mathform: \(\overline{t}\)
+    default: 1.
+  axial_gap:
+    description: Осевой зазор, [мм]
+    mathform: \(\delta\)
+    default: 5.6
+rotor_blade:
+  rotor_blade_chord:
+    description: Хорда лопатки, [мм]
+    mathform: \(B_2\)
+    default: 28.3
+  rotor_blade_inlet_angle:
+    description: Угол входа потока, [град.]
+    mathform: \(\beta_1\)
+    default: 30.0
+  rotor_blade_outlet_angle:
+    description: Угол выхода потока, [град.]
+    mathform: \(\beta_2\)
+    default: 30.0
+  rotor_blade_inlet_opening_angle:
+    description: Угол раскрытия передней кромки, [град.]
+    mathform: \(\gamma_1\)
+    default: 10.0
+  rotor_blade_outlet_opening_angle:
+    description: Угол раскрытия задней кромки, [град.]
+    mathform: \(\gamma_2\)
+    default: 8.0
+  rotor_leading_edge_radius:
+    description: Радиус передней кромки, [мм]
+    mathform: \(r_1\)
+    default: 0.708
+  rotor_trailing_edge_radius:
+    description: Радиус задней кромки, [мм]
+    mathform: \(r_2\)
+    default: 0.283
+  rotor_relative_step:
+    description: Относительный шаг турбинной решетки
+    mathform: \(\overline{t}\)
+    default: 0.7
+flow_parameters:
+  inlet_absolute_velocity:
+    description: Скорость потока в абсолютном движении на входе в рабочий аппарат, [м/с]
+    mathform: \(c_1\)
+    default: 649.6
+  outlet_absolute_velocity:
+    description: Скорость потока в абсолютном движении на выходе из рабочего аппарата, [м/с]
+    mathform: \(c_2\)
+    default: 265.0
+  inlet_relative_velocity:
+    description: Скорость потока в относительном движении на входе в рабочий аппарат, [м/с]
+    mathform: \(w_1\)
+    default: 399
+  outlet_relative_velocity:
+    description: Скорость потока в относительном движении на выходе из рабочего аппарата, [м/с]
+    mathform: \(w_2\)
+    default: 438.3
