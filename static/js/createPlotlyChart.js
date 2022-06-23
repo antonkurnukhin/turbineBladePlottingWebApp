@@ -1,24 +1,34 @@
-function draw_chart(chartData) {
-  var trace0 = {
-    type: 'line',
-    x: chartData.x0,
-    y: chartData.y0,
-    line: { color: '#343a40', width: 1 }
+function draw_all_data(chartData) {
+  var data = [];
+  for (var key in chartData) {
+    if (key.includes("blade")) {
+      data.push(
+        {
+          name: key,
+          type: 'line',
+          x: chartData[key][0],
+          y: chartData[key][1],
+          line: { 
+            color: '#343a40', 
+            width: 1 
+          }
+        }
+      );
+    } else {
+      data.push(
+        {
+          name: key,
+          type: 'line',
+          x: chartData[key][0],
+          y: chartData[key][1],
+          line: { 
+            color: '#141a40', 
+            width: 2 
+          }
+        }
+      );
+    };
   };
-  var trace1 = {
-    type: 'line',
-    x: chartData.x1,
-    y: chartData.y1,
-    line: { color: '#343a40', width: 1 }
-  };
-  var trace2 = {
-    type: 'line',
-    x: chartData.x2,
-    y: chartData.y2,
-    line: { color: '#343a40', width: 1 }
-  };
-  
-  var data = [ trace0, trace1, trace2 ];
   
   var layout = { 
     showlegend: false,
