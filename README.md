@@ -83,6 +83,9 @@ TODO
 Данный проект является открытым для любого использования в соответствии с лицензией MIT.
 
 ## Контакты
-
+<a href="https://spb.hh.ru/applicant/resumes/view?resume=88747db9ff0af782180039ed1f66576e306b43">
 <img src="./static/logos/hh.png" alt="HH.ru" title="" align="left" width="40%" />
+</a>
+<a href="https://t.me/KurnukhinAnton">
 <img src="./static/logos/tg.png" alt="Telegram" title="" align="right" width="40%" />
+</a>
