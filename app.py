@@ -5,6 +5,7 @@ import yaml
 
 from src.blade_geometry_calculation import create_blade_section
 from src.velocity_triangle_calculation import calculate_velocity_triangle
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev'
@@ -28,6 +29,7 @@ def theory():
 def calculate_geometry():
     if request.method == 'POST':
         data = {k: float(v) for k, v in request.get_json().items() if k != 'projectName'}
+        print(json.dumps(data, indent=2))
 
         calculation_data = {
             'stator': create_blade_section(

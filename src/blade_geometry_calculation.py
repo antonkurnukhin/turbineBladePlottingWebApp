@@ -23,6 +23,7 @@ def create_blade_section(
         isinstance(number_of_dots_for_bezier_curve, int) else \
         int(number_of_dots_for_bezier_curve)
     number_of_dots_for_edge_arc_bezier_curve = int(number_of_dots_for_bezier_curve/5)
+    
     # radians
     blade_inlet_angle = np.radians(blade_inlet_angle)
     blade_outlet_angle = np.pi-np.radians(blade_outlet_angle)
@@ -152,12 +153,11 @@ if __name__ == '__main__':
 
     if blade_type == 0:
         turbine_blade_chord = 28.3
-        turbine_blade_inlet_angle = np.radians(30.)
-        turbine_blade_outlet_angle = np.pi-np.radians(30.)
-        turbine_blade_installation_angle = (
-            turbine_blade_inlet_angle+turbine_blade_outlet_angle)/2.
-        turbine_blade_inlet_opening_angle = np.radians(10.)
-        turbine_blade_outlet_opening_angle = np.radians(8.)
+        turbine_blade_inlet_angle = 30.
+        turbine_blade_outlet_angle = 30.
+        turbine_blade_installation_angle = (turbine_blade_inlet_angle+180-turbine_blade_outlet_angle)/2.
+        turbine_blade_inlet_opening_angle = 10.
+        turbine_blade_outlet_opening_angle = 8.
         turbine_leading_edge_radius = turbine_blade_chord*0.025
         turbine_trailing_edge_radius = turbine_blade_chord*0.01
         turbine_inlet_flow_speed = 100.
@@ -176,12 +176,12 @@ if __name__ == '__main__':
             outlet_flow_speed=turbine_outlet_flow_speed)
     else:
         compressor_blade_chord = 30.
-        compressor_blade_inlet_angle = np.radians(30.)
-        compressor_blade_outlet_angle = np.radians(50.)
+        compressor_blade_inlet_angle = (30.)
+        compressor_blade_outlet_angle = (50.)
         compressor_blade_installation_angle = (
             compressor_blade_inlet_angle + compressor_blade_outlet_angle) / 2.
-        compressor_blade_inlet_opening_angle = np.radians(6.)
-        compressor_blade_outlet_opening_angle = np.radians(4.)
+        compressor_blade_inlet_opening_angle = (6.)
+        compressor_blade_outlet_opening_angle = (4.)
         compressor_leading_edge_radius = 0.1
         compressor_trailing_edge_radius = 0.1
         compressor_inlet_flow_speed = 100.

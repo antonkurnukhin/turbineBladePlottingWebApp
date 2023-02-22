@@ -55,6 +55,7 @@ def calculate_velocity_triangle(
 
     if circumferential_velocity_0!=circumferential_velocity_1:
         message = 'Окружные скорости на входе в рабочий венец и на выходе из него не равны. Возможно, допущена ошибка в расчёта газодинамики.'
+        message_en = 'Peripheral speeds at the entrance to the working crown and at the exit from it are not available. Perhaps an error was made in the calculation of gas dynamics.'
 
     return {
         'inlet_absolute_coordinates': inlet_absolute_coordinates,
